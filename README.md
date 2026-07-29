@@ -1,10 +1,16 @@
 # Deploy and Host Appsmith on Railway
 
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/appsmith)
+
+**Published:** https://railway.com/deploy/appsmith (marketplace code `appsmith`, category `Starters`).
+
 Appsmith is an open-source low-code platform for building internal tools, dashboards, admin panels, and business applications. It combines drag-and-drop UI widgets with database and API connectors, JavaScript customization, Git-based workflows, and application sharing so teams can ship data-driven tools without building every interface from scratch.
 
 ## About Hosting Appsmith
 
 Hosting Appsmith on Railway runs the official Community Edition v2.2 image as a single stateful service. The image supervises the web editor, Java backend, real-time service, MongoDB, Redis, and supporting PostgreSQL process internally. Railway routes HTTPS traffic to Appsmith's HTTP port 80, checks readiness at `/api/v1/health`, and mounts a persistent volume at `/appsmith-stacks` for databases, configuration, Git checkouts, and backups. The template generates independent encryption password, encryption salt, and Supervisor credentials; sets the public base URL from Railway's generated domain; disables telemetry; restricts framing to the same origin; and requires an administrator email while keeping public signup disabled.
+
+> **Administrator email required:** `APPSMITH_ADMIN_EMAILS` is a required deployer-specific input because public signup is disabled. During deployment, enter the email address that should receive administrator access. Appsmith CE v2.2 accepts multiple administrator addresses separated by commas. The template intentionally provides no default; never put a real email address in the template itself.
 
 ## Common Use Cases
 
@@ -27,7 +33,7 @@ Hosting Appsmith on Railway runs the official Community Edition v2.2 image as a 
 
 - **Image:** `appsmith/appsmith-ce:v2.2` (resolved source digest `sha256:dc17b968c88eebf42b85c2e22b97efb55f2339b2d685e48f804c5f87bdd9d4e5` during verification)
 - **Networking:** Railway public HTTPS domain targeting Appsmith's official HTTP port `80`; the Supervisor port is not published
-- **Health check:** `/api/v1/health` with a 600-second startup allowance
+- **Health check:** `/api/v1/health` using Railway's default 300-second allowance, matching Appsmith's documented startup window of up to five minutes
 - **Persistence:** one volume mounted at `/appsmith-stacks`
 - **Security:** independent generated encryption secrets, generated Supervisor password, same-origin frame policy, telemetry disabled, public signup disabled, and a required administrator-email input
 
