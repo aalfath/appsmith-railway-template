@@ -8,9 +8,9 @@ The Appsmith template is published on the Railway marketplace. Its final configu
 | --- | --- |
 | Title | `Appsmith` |
 | Template ID | `00e8cdd2-c7eb-4d9e-bb4e-56f4b3f2920b` |
-| Final marketplace code | `appsmith` |
+| Final marketplace code | `appsmith-1` |
 | Original draft code | `CJ_jFB` |
-| Deploy URL | https://railway.com/deploy/appsmith |
+| Deploy URL | https://railway.com/deploy/appsmith-1 |
 | Editor URL | https://railway.com/workspace/templates/00e8cdd2-c7eb-4d9e-bb4e-56f4b3f2920b |
 | Status | `PUBLISHED` |
 | Category | `Starters` |
@@ -109,10 +109,10 @@ No source-project secret or personal email appears above. Each generated secret 
 ## Commands and evidence summary
 
 - `railway templates create --project 3d1f3a0a-1344-45ae-8d4f-e5d15f92e671 --environment ebaafac2-37c5-4cd5-a896-e4e36dee8b6b --json` created draft `CJ_jFB`.
-- `railway templates publish 00e8cdd2-c7eb-4d9e-bb4e-56f4b3f2920b ...` returned status `PUBLISHED`, final code `appsmith`, and deploy URL https://railway.com/deploy/appsmith.
+- `railway templates publish 00e8cdd2-c7eb-4d9e-bb4e-56f4b3f2920b ...` returned status `PUBLISHED`, final code `appsmith-1`, and deploy URL https://railway.com/deploy/appsmith-1.
 - Post-publication GraphQL `template(id:) { serializedConfig }` audit matched every expected key and safe representation without printing source values.
 - GraphQL `serviceInstance` audit confirmed exact image, resolved digest, volume, health path/timeout, and successful deployment.
 - Source-project `curl` checks returned HTTP 200 for `/api/v1/health` and `/`; CSP is `frame-ancestors 'self'` and `X-Content-Type-Options` is `nosniff`.
 - `supervisorctl status` after a Railway restart reported all seven listed processes `RUNNING`.
 - Persistence marker survived restart and was removed.
-- https://railway.com/deploy/appsmith and the final official icon URL both returned HTTP 200 after publication.
+- https://railway.com/deploy/appsmith-1 and the final official icon URL both returned HTTP 200 after publication.

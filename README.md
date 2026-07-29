@@ -1,8 +1,8 @@
 # Deploy and Host Appsmith on Railway
 
-[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/appsmith)
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/appsmith-1)
 
-**Published:** https://railway.com/deploy/appsmith (marketplace code `appsmith`, category `Starters`).
+**Published:** https://railway.com/deploy/appsmith-1 (marketplace code `appsmith-1`, category `Starters`).
 
 Appsmith is an open-source low-code platform for building internal tools, dashboards, admin panels, and business applications. It combines drag-and-drop UI widgets with database and API connectors, JavaScript customization, Git-based workflows, and application sharing so teams can ship data-driven tools without building every interface from scratch.
 
