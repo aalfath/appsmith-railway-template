@@ -7,10 +7,9 @@ FROM appsmith/appsmith-ce:v2.7.0@sha256:ba7e575a188f64aa83e646d53267330462682535
 ENV APPSMITH_DISABLE_TELEMETRY=true \
     APPSMITH_SIGNUP_DISABLED=true
 
-# All state (embedded MongoDB, Redis, Postgres, config, Git checkouts, backups)
-# lives here. The Railway template mounts a volume at this path.
-VOLUME ["/appsmith-stacks"]
 
+# All state lives in /appsmith-stacks; the Railway template mounts a volume there
+# (Railway rejects a Dockerfile VOLUME instruction).
 EXPOSE 80
 
 # The image's own entrypoint and command (supervisord with Caddy on port 80)
