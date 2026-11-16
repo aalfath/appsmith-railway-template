@@ -3,6 +3,10 @@
 Deployers of the Railway template get an "update available" notice when this
 repo's `main` changes. Read the entry before you apply an update.
 
+## 2.7.0-railway.2 (2026-11-16)
+
+- README: Deploy on Railway button linking to the published template `appsmith-1`. No change to the app or its config.
+
 ## 2.7.0-railway.1 (2026-11-16)
 
 **Breaking for existing image-based deploys:** none. This is the first release
