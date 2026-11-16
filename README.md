@@ -1,44 +1,49 @@
-# Deploy and Host Appsmith on Railway
+# Appsmith on Railway
 
-[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/appsmith-1)
+Railway template for [Appsmith](https://www.appsmith.com/) Community Edition,
+the open-source low-code platform for internal tools, dashboards and admin panels.
 
-**Published:** https://railway.com/deploy/appsmith-1 (marketplace code `appsmith-1`, category `Starters`).
+**Deploys:** Appsmith CE **v2.7.0** (`appsmith/appsmith-ce:v2.7.0@sha256:ba7e575a…`),
+built from this repo's `Dockerfile`, as a single service with a volume at
+`/appsmith-stacks`. The official image runs the editor, the Java backend, the
+real-time service and its own MongoDB, Redis and Postgres inside one container.
 
-Appsmith is an open-source low-code platform for building internal tools, dashboards, admin panels, and business applications. It combines drag-and-drop UI widgets with database and API connectors, JavaScript customization, Git-based workflows, and application sharing so teams can ship data-driven tools without building every interface from scratch.
+Template: https://railway.com/deploy/appsmith-1
 
-## About Hosting Appsmith
+## First login
 
-Hosting Appsmith on Railway runs the official Community Edition v2.2 image as a single stateful service. The image supervises the web editor, Java backend, real-time service, MongoDB, Redis, and supporting PostgreSQL process internally. Railway routes HTTPS traffic to Appsmith's HTTP port 80, checks readiness at `/api/v1/health`, and mounts a persistent volume at `/appsmith-stacks` for databases, configuration, Git checkouts, and backups. The template generates independent encryption password, encryption salt, and Supervisor credentials; sets the public base URL from Railway's generated domain; disables telemetry; restricts framing to the same origin; and requires an administrator email while keeping public signup disabled.
+1. Deploy and enter your email in `APPSMITH_ADMIN_EMAILS`.
+2. Wait for the first boot (2–5 minutes; the health check is `/api/v1/health`).
+3. Open `https://YOUR-DOMAIN/user/signup` and **sign up with exactly that email**.
+   That account becomes the instance admin.
 
-> **Administrator email required:** `APPSMITH_ADMIN_EMAILS` is a required deployer-specific input because public signup is disabled. During deployment, enter the email address that should receive administrator access. Appsmith CE v2.2 accepts multiple administrator addresses separated by commas. The template intentionally provides no default; never put a real email address in the template itself.
+Appsmith creates the admin address as a locked user at boot, so going straight
+to `/user/login` answers "User account is locked". Public sign-up stays off for
+every other address (`APPSMITH_SIGNUP_DISABLED=true`); invite more users from
+the workspace once you're in.
 
-## Common Use Cases
+## Variables
 
-- Build internal admin panels and operational dashboards
-- Create database-backed CRUD tools and approval workflows
-- Connect APIs, databases, and SaaS services through a visual application builder
+| Variable | Default | Notes |
+|---|---|---|
+| `APPSMITH_ADMIN_EMAILS` | *(you enter it)* | Admin email(s), comma-separated. Required. |
+| `APPSMITH_BASE_URL` | `https://${{Appsmith.RAILWAY_PUBLIC_DOMAIN}}` | Public URL used in links and emails. |
+| `APPSMITH_ALLOWED_FRAME_ANCESTORS` | same as base URL | Who may embed Appsmith in an iframe. |
+| `APPSMITH_ENCRYPTION_PASSWORD`, `APPSMITH_ENCRYPTION_SALT` | generated | Encrypt datasource credentials. Never change them after the first boot. |
+| `APPSMITH_SUPERVISOR_PASSWORD` | generated | Internal supervisord UI; not exposed. |
+| `APPSMITH_SIGNUP_DISABLED` | `true` | Keep on, unless you want open sign-up. |
+| `APPSMITH_DISABLE_TELEMETRY` | `true` | Anonymous usage data off. |
+| `PORT` | `80` | Railway routes the public domain to Appsmith's HTTP port. |
 
-## Dependencies for Appsmith Hosting
+Optional features such as SMTP, Google or GitHub sign-in are set later in
+Appsmith's Admin Settings or with the variables in
+[Appsmith's reference](https://docs.appsmith.com/getting-started/setup/environment-variables).
 
-- Official `appsmith/appsmith-ce:v2.2` single-container image with embedded application and data services
-- Railway persistent volume mounted at `/appsmith-stacks`
+## Updates
 
-### Deployment Dependencies
-
-- [Appsmith Docker installation guide](https://docs.appsmith.com/getting-started/setup/installation-guides/docker)
-- [Appsmith environment-variable reference](https://docs.appsmith.com/getting-started/setup/environment-variables)
-- [Appsmith v2.2 Umbrel manifest and Compose package](https://github.com/getumbrel/umbrel-apps/tree/master/appsmith)
-
-## Implementation Details
-
-- **Image:** `appsmith/appsmith-ce:v2.2` (resolved source digest `sha256:dc17b968c88eebf42b85c2e22b97efb55f2339b2d685e48f804c5f87bdd9d4e5` during verification)
-- **Networking:** Railway public HTTPS domain targeting Appsmith's official HTTP port `80`; the Supervisor port is not published
-- **Health check:** `/api/v1/health` using Railway's default 300-second allowance, matching Appsmith's documented startup window of up to five minutes
-- **Persistence:** one volume mounted at `/appsmith-stacks`
-- **Security:** independent generated encryption secrets, generated Supervisor password, same-origin frame policy, telemetry disabled, public signup disabled, and a required administrator-email input
-
-## Why Deploy Appsmith on Railway?
-
-Railway is a singular platform to deploy your infrastructure stack. Railway will host your infrastructure so you don't have to deal with configuration, while allowing you to vertically and horizontally scale it.
-
-By deploying Appsmith on Railway, you are one step closer to supporting a complete full-stack application with minimal burden. Host your servers, databases, AI agents, and more on Railway.
+The image is pinned by version and digest. A new Appsmith release lands here as
+a PR that bumps the `FROM` line and adds a `CHANGELOG.md` entry. When it merges
+to `main`, Railway shows everyone who deployed the template an "update
+available" notice, and they choose when to apply it. Back up first (Admin
+Settings → Backup, or `appsmithctl backup`): Appsmith migrates its data on the
+first start of a new version.
