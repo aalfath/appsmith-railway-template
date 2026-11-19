@@ -3,6 +3,12 @@
 Deployers of the Railway template get an "update available" notice when this
 repo's `main` changes. Read the entry before you apply an update.
 
+## 2.7.1 (2026-11-19)
+
+- No breaking changes. Apps, workspaces and users in the embedded MongoDB on the `/appsmith-stacks` volume are kept; Appsmith runs its own migrations at start.
+- Appsmith [v2.7.1](https://github.com/appsmithorg/appsmith/releases/tag/v2.7.1): security fixes and bug fixes.
+- Image: `appsmith/appsmith-ce:v2.7.1@sha256:0d2f4d4122b47e0a0b80fe7681d7bf8dfb4b14ccb9f6ee3e6092968c22c04b15`.
+
 ## 2.7.0-railway.2 (2026-11-16)
 
 - README: Deploy on Railway button linking to the published template `appsmith-1`. No change to the app or its config.
