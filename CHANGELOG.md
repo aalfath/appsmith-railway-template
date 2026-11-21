@@ -3,6 +3,12 @@
 Deployers of the Railway template get an "update available" notice when this
 repo's `main` changes. Read the entry before you apply an update.
 
+## 2.7.2 (2026-11-21): security release
+
+- No breaking changes. Apps, workspaces and users in the embedded MongoDB on the `/appsmith-stacks` volume are kept; Appsmith runs its own migrations at start.
+- Appsmith [v2.7.2](https://github.com/appsmithorg/appsmith/releases/tag/v2.7.2) bundles Eclipse Temurin 25.0.5.1, which fixes [CVE-2026-114938](https://nvd.nist.gov/vuln/detail/CVE-2026-114938) ("Java4Shell") in the Java runtime. Upstream says every earlier Appsmith image has an affected Java version, so apply this update.
+- Image: `appsmith/appsmith-ce:v2.7.2@sha256:1f456089b75edec495c005f0e94858aa5c6d1408fcac5f7c1e2d85d69bd1592d`.
+
 ## 2.7.1 (2026-11-19)
 
 - No breaking changes. Apps, workspaces and users in the embedded MongoDB on the `/appsmith-stacks` volume are kept; Appsmith runs its own migrations at start.

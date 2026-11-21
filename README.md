@@ -5,7 +5,7 @@
 Railway template for [Appsmith](https://www.appsmith.com/) Community Edition,
 the open-source low-code platform for internal tools, dashboards and admin panels.
 
-**Deploys:** Appsmith CE **v2.7.1** (`appsmith/appsmith-ce:v2.7.1@sha256:0d2f4d41…`),
+**Deploys:** Appsmith CE **v2.7.2** (`appsmith/appsmith-ce:v2.7.2@sha256:1f456089…`),
 built from this repo's `Dockerfile`, as a single service with a volume at
 `/appsmith-stacks`. The official image runs the editor, the Java backend, the
 real-time service and its own MongoDB, Redis and Postgres inside one container.
